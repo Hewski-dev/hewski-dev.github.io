@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>♥ Sonsuz Aşk ♥</title>
+    <style>
+        body {
+            background-color: #FFE4E1;
+            font-family: 'Comic Sans MS', cursive;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
+            background-image: linear-gradient(45deg, #FFE4E1, #FFC0CB);
+        }
+        
+        .love-button {
+            background-color: #FF69B4;
+            color: white;
+            padding: 20px 40px;
+            font-size: 24px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 20px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+            z-index: 1000;
+            position: relative;
+        }
+        
+        .love-button:hover {
+            background-color: #FF1493;
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.6);
+        }
+        
+        .message {
+            font-size: 28px;
+            color: #FF1493;
+            margin: 20px;
+            display: none;
+            line-height: 1.8;
+            text-shadow: 2px 2px 4px rgba(255, 20, 147, 0.3);
+            position: relative;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: red;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .drawn-heart {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 50px auto;
+            animation: pulse 1.5s ease infinite;
+        }
+
+        .drawn-heart:before,
+        .drawn-heart:after {
+            position: absolute;
+            content: "";
+            left: 50px;
+            top: 0;
+            width: 50px;
+            height: 80px;
+            background: #FF1493;
+            border-radius: 50px 50px 0 0;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .drawn-heart:after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .message.show {
+            display: block;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .music-button {
+            background-color: #FF1493;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 20px;
+            transition: all 0.3s;
+            display: none;
+        }
+
+        .music-button:hover {
+            background-color: #FF69B4;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <button class="love-button" onclick="showLove()">♥ Sonsuz Sevgi ♥</button>
+    
+    <div id="message" class="message">
+        Melisa'ya Aşığım<br>
+        Onu çok seviyorum<br>
+        Her salise onu düşünüyorum<br>
+        Ondan asla vazgeçmeyeceğim
+    </div>
+
+    <div class="drawn-heart"></div>
+
+    <button id="musicButton" class="music-button" onclick="playMusic()">
+        ♪ Aşkımızın Şarkısını Çal ♪
+    </button>
+
+    <div id="hearts-container"></div>
+
+    <script>
+        window.onload = function() {
+            createInfiniteHearts();
+        }
+
+        function showLove() {
+            const message = document.getElementById('message');
+            const musicButton = document.getElementById('musicButton');
+            message.style.display = 'block';
+            message.classList.add('show');
+            musicButton.style.display = 'inline-block';
+        }
+
+        function playMusic() {
+            window.open('https://www.youtube.com/watch?v=2Mbm1wri340', '_blank');
+        }
+        
+        function createInfiniteHearts() {
+            const container = document.getElementById('hearts-container');
+            const colors = ['#FF69B4', '#FF1493', '#FF0000', '#FFC0CB'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '♥';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
+                heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+                
+                container.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 4000);
+            }, 200);
+        }
+    </script>
+</body>
+</html>
